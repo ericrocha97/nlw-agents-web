@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@import "./theme/rose-pine/rose-pine-pine.css";
+@import "./theme/rose-pine/rose-pine-dawn.css";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --background: var(--color-rose-pine-dawn-base);
+  --foreground: var(--color-rose-pine-dawn-text);
+  --card: var(--color-rose-pine-dawn-surface);
+  --card-foreground: var(--color-rose-pine-dawn-text);
+  --popover: var(--color-rose-pine-dawn-overlay);
+  --popover-foreground: var(--color-rose-pine-dawn-text);
+  --primary: var(--color-rose-pine-dawn-pine);
+  --primary-foreground: var(--color-rose-pine-dawn-surface);
+  --secondary: var(--color-rose-pine-dawn-foam);
+  --secondary-foreground: var(--color-rose-pine-dawn-surface);
+  --muted: var(--color-rose-pine-dawn-muted);
+  --muted-foreground: var(--color-rose-pine-dawn-subtle);
+  --accent: var(--color-rose-pine-dawn-gold);
+  --accent-foreground: var(--color-rose-pine-dawn-surface);
+  --destructive: var(--color-rose-pine-dawn-love);
+  --border: var(--color-rose-pine-dawn-highlight-med);
+  --input: var(--color-rose-pine-dawn-highlight-high);
+  --ring: var(--color-rose-pine-dawn-highlight-low);
+  --chart-1: var(--color-rose-pine-dawn-rose);
+  --chart-2: var(--color-rose-pine-dawn-foam);
+  --chart-3: var(--color-rose-pine-dawn-iris);
+  --chart-4: var(--color-rose-pine-dawn-gold);
+  --chart-5: var(--color-rose-pine-dawn-pine);
+  --sidebar: var(--color-rose-pine-dawn-surface);
+  --sidebar-foreground: var(--color-rose-pine-dawn-text);
+  --sidebar-primary: var(--color-rose-pine-dawn-pine);
+  --sidebar-primary-foreground: var(--color-rose-pine-dawn-surface);
+  --sidebar-accent: var(--color-rose-pine-dawn-foam);
+  --sidebar-accent-foreground: var(--color-rose-pine-dawn-surface);
+  --sidebar-border: var(--color-rose-pine-dawn-highlight-med);
+  --sidebar-ring: var(--color-rose-pine-dawn-highlight-low);
+}
+
+.dark {
+  --background: var(--color-rose-pine-base);
+  --foreground: var(--color-rose-pine-text);
+  --card: var(--color-rose-pine-surface);
+  --card-foreground: var(--color-rose-pine-text);
+  --popover: var(--color-rose-pine-overlay);
+  --popover-foreground: var(--color-rose-pine-text);
+  --primary: var(--color-rose-pine-pine);
+  --primary-foreground: var(--color-rose-pine-base);
+  --secondary: var(--color-rose-pine-foam);
+  --secondary-foreground: var(--color-rose-pine-base);
+  --muted: var(--color-rose-pine-muted);
+  --muted-foreground: var(--color-rose-pine-subtle);
+  --accent: var(--color-rose-pine-gold);
+  --accent-foreground: var(--color-rose-pine-base);
+  --destructive: var(--color-rose-pine-love);
+  --border: var(--color-rose-pine-highlight-med);
+  --input: var(--color-rose-pine-highlight-high);
+  --ring: var(--color-rose-pine-highlight-low);
+  --chart-1: var(--color-rose-pine-rose);
+  --chart-2: var(--color-rose-pine-foam);
+  --chart-3: var(--color-rose-pine-iris);
+  --chart-4: var(--color-rose-pine-gold);
+  --chart-5: var(--color-rose-pine-pine);
+  --sidebar: var(--color-rose-pine-surface);
+  --sidebar-foreground: var(--color-rose-pine-text);
+  --sidebar-primary: var(--color-rose-pine-pine);
+  --sidebar-primary-foreground: var(--color-rose-pine-base);
+  --sidebar-accent: var(--color-rose-pine-foam);
+  --sidebar-accent-foreground: var(--color-rose-pine-base);
+  --sidebar-border: var(--color-rose-pine-highlight-med);
+  --sidebar-ring: var(--color-rose-pine-highlight-low);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
