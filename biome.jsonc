@@ -7,7 +7,12 @@
     }
   },
   "linter": {
-    "includes": ["src/**", "!src/components/ui/**", "!src/lib/**"]
+    "includes": ["src/**", "!src/components/ui/**", "!src/lib/**"],
+    "rules": {
+      "nursery": {
+        "noUnknownAtRule": "off"
+      }
+    }
   },
   "formatter": {
     "includes": ["src/**", "!src/components/ui/**", "!src/lib/**"]
