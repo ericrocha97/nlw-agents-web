@@ -1,134 +1,43 @@
-import { useRef, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { toast } from 'sonner'
 import { Header } from '@/components/header'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-
-const isRecordingSupported =
-  !!navigator.mediaDevices &&
-  typeof navigator.mediaDevices.getUserMedia === 'function' &&
-  typeof window.MediaRecorder === 'function'
-
-type RoomParams = {
-  roomId: string
-}
-
-function formatTime(seconds: number): string {
-  const minutes = Math.floor(seconds / 60)
-  const remainingSeconds = seconds % 60
-  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
-}
+import { useAudioRecorder } from '@/hooks/use-audio-recorder'
+import { formatTime } from '@/lib/utils'
+import type { RoomParams } from '@/types'
 
 export function RecordRoomAudio() {
   const params = useParams<RoomParams>()
-  const [isRecording, setIsRecording] = useState(false)
-  const [recordingTime, setRecordingTime] = useState(0)
-  const recorder = useRef<MediaRecorder | null>(null)
-  const intervalRef = useRef<NodeJS.Timeout>(null)
-  const timerRef = useRef<NodeJS.Timeout>(null)
+  const roomId = params.roomId ?? ''
 
-  function stopRecording() {
-    setIsRecording(false)
-    setRecordingTime(0)
+  const {
+    isRecording,
+    recordingTime,
+    startRecording,
+    stopRecording,
+    isRecordingSupported,
+  } = useAudioRecorder({ roomId })
 
-    if (recorder.current && recorder.current.state !== 'inactive') {
-      recorder.current.stop()
-    }
-
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
-
-    if (timerRef.current) {
-      clearInterval(timerRef.current)
-    }
-  }
-
-  async function uploadAudio(audio: Blob) {
-    const formData = new FormData()
-
-    formData.append('file', audio, 'audio.webm')
-
-    const response = await fetch(
-      `http://localhost:3333/rooms/${params.roomId}/audio`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-
-    const result = await response.json()
-
-    if (response.ok) {
-      toast.success('Áudio enviado com sucesso!')
-    } else {
-      toast.error(
-        `Erro ao enviar áudio: ${result.message || 'Erro desconhecido'}`
-      )
-    }
-  }
-
-  function createRecorder(audio: MediaStream) {
-    recorder.current = new MediaRecorder(audio, {
-      mimeType: 'audio/webm',
-      audioBitsPerSecond: 64_000,
-    })
-
-    recorder.current.ondataavailable = (event) => {
-      if (event.data.size > 0) {
-        uploadAudio(event.data)
-      }
-    }
-
-    recorder.current.onstart = () => {
-      toast.success('Gravação iniciada com sucesso!')
-    }
-
-    recorder.current.onstop = () => {
-      toast.success('Gravação pausada com sucesso!')
-    }
-
-    recorder.current.start()
-  }
-
-  async function startRecording() {
-    if (!isRecordingSupported) {
-      toast.warning('O seu navegador não suporta gravação')
-      return
-    }
-
-    setIsRecording(true)
-    setRecordingTime(0)
-
-    timerRef.current = setInterval(() => {
-      setRecordingTime((time) => time + 1)
-    }, 1000)
-
-    const audio = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        echoCancellation: true,
-        noiseSuppression: true,
-        sampleRate: 44_100,
-      },
-    })
-
-    createRecorder(audio)
-
-    intervalRef.current = setInterval(() => {
-      recorder.current?.stop()
-
-      createRecorder(audio)
-    }, 5000)
-  }
-
-  if (!params.roomId) {
+  if (!roomId) {
     return <Navigate replace to="/" />
+  }
+
+  if (!isRecordingSupported) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center">
+        <p className="mb-4 text-destructive text-lg">
+          A gravação de áudio não é suportada neste navegador.
+        </p>
+        <Button asChild>
+          <a href="/">Voltar para o início</a>
+        </Button>
+      </div>
+    )
   }
 
   return (
     <div className="flex h-screen flex-col">
-      <Header backTo={`/room/${params.roomId}`} showBackButton />
+      <Header backTo={`/room/${roomId}`} showBackButton />
 
       <main className="flex-1">
         <div className="mx-auto flex h-full max-w-4xl flex-col items-center justify-center gap-4 p-4">

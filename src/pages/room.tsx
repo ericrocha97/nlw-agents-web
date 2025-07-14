@@ -1,13 +1,9 @@
-import { Radio } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { Header } from '@/components/header'
 import { QuestionForm } from '@/components/question-form'
 import { QuestionList } from '@/components/question-list'
-import { Button } from '@/components/ui/button'
-
-type RoomParams = {
-  roomId: string
-}
+import { RoomHeader } from '@/components/room-header'
+import type { RoomParams } from '@/types'
 
 export function Room() {
   const params = useParams<RoomParams>()
@@ -21,22 +17,7 @@ export function Room() {
       <Header showBackButton />
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <div className="mb-8">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h1 className="mb-2 font-bold text-3xl text-foreground">
-                Sala de Perguntas
-              </h1>
-              <p className="text-muted-foreground">
-                Faça perguntas e receba respostas com IA
-              </p>
-            </div>
-            <Link to={`/room/${params.roomId}/audio`}>
-              <Button className="flex items-center gap-2" variant="secondary">
-                <Radio className="size-4" />
-                Gravar Áudio
-              </Button>
-            </Link>
-          </div>
+          <RoomHeader roomId={params.roomId} />
         </div>
 
         <div className="mb-8">
