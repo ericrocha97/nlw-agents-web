@@ -1,74 +1,85 @@
-# NLW Agents
+# NLW Agents - Web
 
-Projeto desenvolvido durante um evento da Rocketseat para demonstrar o uso de agentes inteligentes na web.
+Este é o frontend web do projeto NLW Agents, uma aplicação que permite criar salas de perguntas e respostas, com a inovadora funcionalidade de gravação de áudio para interação com inteligência artificial.
 
-## 🚀 Tecnologias
+## 🚀 Funcionalidades
 
-- **React** - Biblioteca para interfaces de usuário
-- **TypeScript** - Superset JavaScript com tipagem estática
-- **Vite** - Build tool e servidor de desenvolvimento
-- **TailwindCSS** - Framework CSS utility-first
-- **React Router Dom** - Biblioteca de roteamento
-- **TanStack React Query** - Gerenciamento de estado servidor e cache
-- **Radix UI** - Componentes primitivos acessíveis
-- **Class Variance Authority** - Construção de variantes de componentes
-- **Lucide React** - Biblioteca de ícones
+- **Criação de Salas:** Crie facilmente novas salas para organizar suas sessões de perguntas e respostas.
+- **Envio de Perguntas:** Envie perguntas de texto para as salas.
+- **Gravação de Áudio para Respostas:** Grave segmentos de áudio que serão transcritos e utilizados pela inteligência artificial para gerar respostas às perguntas feitas na sala.
+- **Visualização de Perguntas:** Acompanhe as perguntas enviadas em tempo real.
+- **Interface Responsiva:** Design adaptável para diferentes tamanhos de tela.
+- **Tema Escuro/Claro:** Alternância entre temas para melhor experiência visual.
 
-## 📂 Padrões de Projeto
+## ✨ Tecnologias Utilizadas
 
-- **Component-based Architecture** - Arquitetura baseada em componentes React
-- **File-based Routing** - Roteamento baseado em arquivos com React Router
-- **Server State Management** - Gerenciamento de estado servidor com React Query
-- **Variant-based Components** - Componentes com variantes usando CVA
-- **Composition Pattern** - Padrão de composição com Radix Slot
-- **Path Aliasing** - Alias de caminhos (`@/` aponta para `src/`)
+- **React:** Biblioteca JavaScript para construção de interfaces de usuário.
+- **Vite:** Ferramenta de build rápida para desenvolvimento frontend.
+- **TypeScript:** Superset do JavaScript que adiciona tipagem estática.
+- **Tailwind CSS:** Framework CSS utilitário para estilização rápida e responsiva.
+- **Radix UI:** Componentes UI acessíveis e de alta performance.
+- **React Router DOM:** Para gerenciamento de rotas na aplicação.
+- **React Query:** Para gerenciamento de estado assíncrono e cache de dados.
+- **Sonner:** Biblioteca para notificações toast elegantes.
+- **Lucide React:** Biblioteca de ícones.
+- **Day.js:** Biblioteca leve para manipulação de datas.
+- **Zod:** Para validação de esquemas.
+- **`useAudioRecorder` (Custom Hook):** Hook customizado para encapsular a lógica de gravação de áudio.
 
-## ⚙️ Configuração do Projeto
+## 🛠️ Configuração e Desenvolvimento
 
 ### Pré-requisitos
 
-- Node.js (versão 18 ou superior)
-- pnpm (recomendado), npm ou yarn
+- Node.js (versão 22 ou superior)
+- pnpm (gerenciador de pacotes)
 
 ### Instalação
 
-1. Clone o repositório
+1. Clone o repositório:
+
+    ```bash
+    git clone https://github.com/ericrocha97/nlw-agents-web.git
+    cd nlw-agents-web
+    ```
+
 2. Instale as dependências:
 
-   ```bash
-   pnpm install
-   ```
+    ```bash
+    pnpm install
+    ```
 
-3. Execute o servidor de desenvolvimento:
+### Variáveis de Ambiente
 
-   ```bash
-   pnpm dev
-   ```
+Crie um arquivo `.env` na raiz do projeto, baseado no `.env.example`:
 
-4. Acesse a aplicação em `http://localhost:5173`
-
-### Scripts Disponíveis
-
-- `pnpm dev` - Inicia o servidor de desenvolvimento
-- `pnpm build` - Gera build de produção (executa TypeScript build + Vite build)
-- `pnpm preview` - Preview do build de produção
-
-### Backend
-
-O projeto consome uma API que deve estar rodando na porta 3333. Certifique-se de que o backend esteja configurado e executando antes de iniciar o frontend.
-
-## 🛠️ Estrutura do Projeto
-
+```ini
+VITE_UI_THEME_STORAGE_KEY=vite-ui-theme
 ```
-src/
-├── components/
-│   ├── ui/          # Componentes base do shadcn/ui
-│   ├── mode-toggle  # Componente de alternância de tema
-│   └── theme-provider # Provedor de tema
-├── pages/           # Páginas da aplicação
-│   ├── create-room  # Página de criação de sala
-│   └── room        # Página de detalhes da sala
-├── lib/            # Utilitários e configurações
-├── theme/          # Configurações de tema (rose-pine)
-└── app.tsx         # Componente raiz
+
+### Executando o Projeto
+
+Para iniciar o servidor de desenvolvimento:
+
+```bash
+pnpm dev
 ```
+
+A aplicação estará disponível em `http://localhost:5173` (ou outra porta disponível).
+
+### Build para Produção
+
+Para construir a aplicação para produção:
+
+```bash
+pnpm build
+```
+
+Os arquivos de build serão gerados na pasta `dist`.
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT.
