@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod/v4'
 import { useCreateRoom } from '@/http/use-create-room'
 import { Button } from './ui/button'
@@ -29,7 +30,7 @@ const createRoomSchema = z.object({
 type CreateRoomFormData = z.infer<typeof createRoomSchema>
 
 export function CreateRoomForm() {
-  const { mutateAsync: createRoom } = useCreateRoom()
+  const { mutateAsync: createRoom, error } = useCreateRoom()
 
   const createRoomForm = useForm<CreateRoomFormData>({
     resolver: zodResolver(createRoomSchema),
@@ -41,6 +42,12 @@ export function CreateRoomForm() {
 
   async function handleCreateRoom({ name, description }: CreateRoomFormData) {
     await createRoom({ name, description })
+
+    if (error) {
+      toast.error('Erro ao criar sala')
+      return
+    }
+    toast.success('Sala criada com sucesso')
 
     createRoomForm.reset()
   }

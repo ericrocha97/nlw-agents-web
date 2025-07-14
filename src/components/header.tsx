@@ -5,18 +5,19 @@ import { Button } from './ui/button'
 
 interface HeaderProps {
   showBackButton?: boolean
+  backTo?: string
 }
 
-export function Header({ showBackButton }: HeaderProps) {
+export function Header({ showBackButton, backTo = '/' }: HeaderProps) {
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
         <div className="flex items-center gap-4">
           {showBackButton && (
             <Button asChild variant="outline">
-              <Link to="/">
+              <Link to={backTo}>
                 <ArrowLeft className="mr-2 size-4" />
-                Voltar ao Início
+                Voltar
               </Link>
             </Button>
           )}
